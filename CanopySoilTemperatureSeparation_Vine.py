@@ -94,22 +94,24 @@ def CanopySoilTemperatureSeparation_Vine(dir_LAI, dir_R, dir_NIR, dir_Tr,
             # gain index for soil and canopy pixel for each local domain
             index_soil = np.where(local_NDVI <= Soil_threshold)
             index_veg = np.where(local_NDVI >= Veg_threshold)
+            
+            # under 5% pixel in the grid are vegetation pixel which will be recognized as no vegetation
             # when the domain contains both vegetation and soil
-            if len(index_soil[0]) > 0 and len(index_veg[0]) > 0:
+            if len(index_soil[0]) > 0 and len(index_veg[0]) > 0.05*hor_pixel*ver_pixel:
                 t_canopy[irow,icol] = np.nanmean(local_Tr[index_veg[0],index_veg[1]])
                 t_soil[irow,icol] = np.nanmean(local_Tr[index_soil[0],index_soil[1]])
-            # when the domain contains vegetation but no soil
-            elif len(index_soil[0]) == 0 and len(index_veg[0]) > 0:
+            # when the domain contains vegetation but no soil: estimate the soil temperature
+            elif len(index_soil[0]) == 0 and len(index_veg[0]) > 0.05*hor_pixel*ver_pixel:
                 t_canopy[irow,icol] = np.nanmean(local_Tr[index_veg[0],index_veg[1]])
                 t_soil[irow,icol] = renew_slope * Soil_threshold + renew_intercept
-            # when the domain contains soil but no vegetation
-            elif len(index_soil[0]) > 0 and len(index_veg[0]) == 0:
-                t_canopy[irow,icol] = renew_slope * Veg_threshold + renew_intercept
+            # when the domain contains soil but no vegetation: vegetation temperature is "NAN"
+            elif len(index_soil[0]) > 0 and len(index_veg[0]) <= 0.05*hor_pixel*ver_pixel:
+                t_canopy[irow,icol] = NoDataValue
                 t_soil[irow,icol] = np.nanmean(local_Tr[index_soil[0],index_soil[1]])
             # when the domain contains either pure soil or vegetation
-            elif len(index_soil[0]) == 0 and len(index_veg[0]) == 0:
-                t_canopy[irow,icol] = renew_slope * Veg_threshold + renew_intercept
-                t_soil[irow,icol] = renew_slope * Soil_threshold + renew_intercept
+            elif len(index_soil[0]) == 0 and len(index_veg[0]) <= 0.05*hor_pixel*ver_pixel:
+                t_canopy[irow,icol] = NoDataValue
+                t_soil[irow,icol] = NoDataValue
             t_coeff[irow,icol] = renew_coeff
 
     tt_canopy = np.sqrt(np.sqrt(t_canopy.copy()))
