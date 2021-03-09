@@ -33,7 +33,6 @@ A loop is used for temperature separation grid by grid. Inital slope and interce
 For our project, because the grid (domain) size is 3.6 meter by 3.6 meter, it normally contains both vine vegetation and bare soil in one unit grid. Considering the high-resolution data gathered by the AggieAir, canopy and soil temperature can be gained directly. Estimation based on the NDVI-T_RAD only happens for the grid where it is fully covered by vine vegetation and/or where it is mainly covered by bare soil or unhealthy vegetation. 
 
 
-<br>
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.<br>
 This repository is supposed to be modified later accordingly. If there are any mistakes, welcome to leave comments and send them to me. Thank you in advance.<br>
