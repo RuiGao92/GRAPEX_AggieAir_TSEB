@@ -26,7 +26,8 @@
 - 2 thresholds are required including one threshold from NDVI to divided pure vegetation, one threshold from NDVI to divided pure soil. It is suggested to selected these thresholds visually (manually).
 
 ## Main idea of this function
-- https://link.springer.com/article/10.1007/s00271-018-0585-9 One key characteristic of this function is avoiding
+The paper, evaluation of TSEB turbulent fluxes using different methods for the retrieval of soil and canopy component temperatures from UAV thermal and multispectral imagery (https://link.springer.com/article/10.1007/s00271-018-0585-9), shows the concept how to separate the bulk composite surface radiometric temperature. One key characteristic of this python function (CanopySoilTemperatureSeparation_Vine.py) is avoiding to use the positive linear relationship for canopy and soil temperature estimation for the domain where it does not contain pure vegetation (soil) pixels.<br>
+A loop is used for temperature separation grid by grid. Inital slope and intercept are set as "NAN", and they will be updated along the process for each grid. Once the NDVI-T_rad give a negative slope, slope and intercept are updated.
 
 
 This repository is supposed to be modified later accordingly. If there are any mistakes, welcome to leave comments and send them to me. Thank you in advance.<br>
