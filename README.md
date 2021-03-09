@@ -28,3 +28,7 @@
 ## Main idea of this function
 - 
 
+
+This repository is supposed to be modified later accordingly. If there are any mistakes, welcome to leave comments and send them to me. Thank you in advance.<br>
+Rui Gao<br>
+rui.gao@aggiemail.usu.edu<br>
