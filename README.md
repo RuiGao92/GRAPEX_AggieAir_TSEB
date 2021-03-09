@@ -17,6 +17,8 @@
 &emsp;&emsp;- however, if the vegetation pixel account for at least 5% of the domain area, we will use the relative height to calculate the height to represent the canopy height for that domain. In this situation, if there is no relative height bigger than the height threshold, we asign the height threshold for that domain.<br>
 &emsp;&emsp;- Another situation is that the domain does not contain pure soil pixel. In this situation, the lowest height will not be updated, and other steps are totally the same as the previous processes.<br>
 
+## Example of a generated canopy-height map
+![CanopyHeight_2](https://user-images.githubusercontent.com/51354367/110395455-62889780-802b-11eb-9688-19e7454e5d7c.jpg)
 
 # Function 2:
 ## Content of this repository
