@@ -1,4 +1,7 @@
 # Content of this repository
+- "CanopyHeight_Vine.py": canopy height calculation.
+- "CanopySoilTemperatureSeparation_Vine.py": temperature separation for canopy and soil part in each domain.
+- "README.md": introduction for each function.
 
 # Function 1: CanopyHeight_Vine.py
 ## Content of this repository
