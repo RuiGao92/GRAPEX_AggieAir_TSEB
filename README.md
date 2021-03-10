@@ -35,8 +35,10 @@ For our project, because the grid (domain) size is 3.6 meter by 3.6 meter, it no
 - Estimation based on the NDVI-T_RAD only happens for the grid where it is fully covered by vine vegetation (soil temperature will be estimated).
 - Estimation is invalid for grid where it only contains soil pixel: soil temperature is calculated based on the temperature on the soil pixels but canopy temperature is "NAN".
 - Estimation is invalid for grid where it does not contain either pure soil nor pure canopy pixels. "NAN" will be placed on the grid.
-- Note: when the canopy pixel is counting under 5% of the total area of the grid, it is recognized no vegetation pixel in the domain.
+- Note: when the canopy pixel is counting under 5% of the total area of the grid, it is recognized no vegetation pixel in the domain.<br>
 
+## Example of a scatter plot showing the separation results.
+![Separation](https://user-images.githubusercontent.com/51354367/110698794-56c3df00-81ab-11eb-9f4d-afb19c1905a3.png)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.<br>
