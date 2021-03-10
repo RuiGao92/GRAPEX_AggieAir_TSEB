@@ -38,7 +38,7 @@ For our project, because the grid (domain) size is 3.6 meter by 3.6 meter, it no
 - Note: when the canopy pixel is counting under 5% of the total area of the grid, it is recognized no vegetation pixel in the domain.<br>
 
 ## Example of a scatter plot showing the separation results.
-![Separation](https://user-images.githubusercontent.com/51354367/110698794-56c3df00-81ab-11eb-9f4d-afb19c1905a3.png)
+![Separation1](https://user-images.githubusercontent.com/51354367/110698995-97235d00-81ab-11eb-885e-d10948c9a443.png)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.<br>
