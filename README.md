@@ -5,7 +5,7 @@
 
 # Function 1 - CanopyHeight_Vine.py
 ## Requirements for this function
-![alt text](https://user-images.githubusercontent.com/51354367/111208424-53a46680-8590-11eb-8bce-46b3dfd24403.png){:height="200px" width="200px"}
+![height](https://user-images.githubusercontent.com/51354367/111208424-53a46680-8590-11eb-8bce-46b3dfd24403.png)
 - 4 required images are needed to gain the canopy-height image for the vine at a field scale. Those 4 images including the LAI map, DEM map, Red-band map, and Near-infrared-band map. These maps are required to align with each other, and the pixel size for DEM, Red-band, and Near-infrared-band map should be the same. The pixel size for the LAI, however, is larger than that of others.
 - 3 thresholds are required including one threshold from NDVI to divided pure vegetation, one threshold from NDVI to divided pure soil, and one threshold for height since the special structure of at the field to hold the vine vegetaion. 
 - 1 image representating the canopy height is supposed to be generated at the end.
