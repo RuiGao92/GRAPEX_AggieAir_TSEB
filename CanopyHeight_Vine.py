@@ -2,11 +2,14 @@ def CanopyHeight_Vine(dir_LAI, dir_DEM, dir_R, dir_NIR,
                       NoDataValue, Veg_threshold, Soil_threshold, height_threshold,
                       dir_output, output_name):
     '''
+    Explaination:
+    Using "clip raster" in ArcGIS Map to clip DEM, R, and NIR images to own the same frame as the LAI's frame. Make sure the high-resoulution data is 0.1 meter and the low-resolution data (LAI) is 3.6 meter.
+    
     Parameters:
-    dir_LAI: directory of the LAI image
-    dir_DEM: directory of the DEM data
-    dir_R: directory of the Red band image
-    dir_NIR: directory of the Near-infrared band image
+    dir_LAI: directory of the LAI image. The resolution is 3.6 meter by 3.6 meter.
+    dir_DEM: directory of the DEM data. The resolution is 0.1 meter by 0.1 meter.
+    dir_R: directory of the Red band image. The resolution is 0.1 meter by 0.1 meter.
+    dir_NIR: directory of the Near-infrared band image. The resolution is 0.1 meter by 0.1 meter.
     NoDataValue: set null data accordingly
     Veg_threshold: a threshold from NDVI to identify vegetation pixel
     Soil_threshold: a threshold from NDVI to identify soil pixel
@@ -17,6 +20,7 @@ def CanopyHeight_Vine(dir_LAI, dir_DEM, dir_R, dir_NIR,
     return
     '''
     import arcpy
+    import gdal
     import numpy as np
     import matplotlib.pyplot as plt
 
@@ -28,10 +32,15 @@ def CanopyHeight_Vine(dir_LAI, dir_DEM, dir_R, dir_NIR,
 
     dims_LAI = Array_LAI.shape
     print("LAI dimension is:",dims_LAI[0],dims_LAI[1])
+    dims_rgb = Array_R.shape
+    print("The dimesnion of the high-resolution RGB data is:",dims_rgb[0],dims_rgb[1])
     dims_DEM = Array_DEM.shape
-    print("The dimesnion of the high-resolution data is:",dims_DEM[0],dims_DEM[1])
+    print("The dimesnion of the high-resolution DEM data is:",dims_DEM[0],dims_DEM[1])
     hor_pixel = int(dims_DEM[0]/dims_LAI[0])
     ver_pixel = int(dims_DEM[1]/dims_LAI[1])
+    print("One LAI pixel contains",hor_pixel,"pixels of DEM (also spectral)!")
+    hor_pixel = int(dims_rgb[0]/dims_LAI[0])
+    ver_pixel = int(dims_rgb[1]/dims_LAI[1])
     print("One LAI pixel contains",hor_pixel,"pixels of DEM (also spectral)!")
 
     # Get the information from LAI map for data output
@@ -106,10 +115,10 @@ def CanopyHeight_Vine(dir_LAI, dir_DEM, dir_R, dir_NIR,
                             else:
                                 CanopyHeight[irow,icol] = np.nanmean(local_DEM_new)
 
-    plt.figure()
-    plt.scatter(tmp_hc,tmp_hc)
-    plt.title("Check the canopy-height range from the 1:1 line.")
-    plt.show()
+    #plt.figure()
+    #plt.scatter(tmp_hc,tmp_hc)
+    #plt.title("Check the canopy-height range from the 1:1 line.")
+    #plt.show()
 
     # Write the output file
     driver = gdal.GetDriverByName('GTiff')
