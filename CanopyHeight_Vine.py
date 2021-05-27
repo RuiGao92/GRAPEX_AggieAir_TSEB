@@ -38,10 +38,10 @@ def CanopyHeight_Vine(dir_LAI, dir_DEM, dir_R, dir_NIR,
     print("The dimesnion of the high-resolution DEM data is:",dims_DEM[0],dims_DEM[1])
     hor_pixel = int(dims_DEM[0]/dims_LAI[0])
     ver_pixel = int(dims_DEM[1]/dims_LAI[1])
-    print("One LAI pixel contains",hor_pixel,"pixels of DEM (also spectral)!")
+    print("One LAI pixel contains",hor_pixel,"pixels of DEM!")
     hor_pixel = int(dims_rgb[0]/dims_LAI[0])
     ver_pixel = int(dims_rgb[1]/dims_LAI[1])
-    print("One LAI pixel contains",hor_pixel,"pixels of DEM (also spectral)!")
+    print("One LAI pixel contains",hor_pixel,"pixels of RGB!")
 
     # Get the information from LAI map for data output
     fid=gdal.Open(dir_LAI)
