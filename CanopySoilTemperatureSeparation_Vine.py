@@ -2,11 +2,15 @@ def CanopySoilTemperatureSeparation_Vine(dir_LAI, dir_R, dir_NIR, dir_Tr,
                                          NoDataValue, Veg_threshold, Soil_threshold,
                                          dir_output, output_name):
     '''
+    Requirements:
+    (1) the dimension of the spectral, DEM, and thermal data is the same, and all are aligned with the LAI image. 
+    (2) it is supposed that the LAI contains integer number of pixels of the high-resolution data.
+    
     Parameters:
     dir_LAI: directory of the LAI image
     dir_R: directory of the Red band image
     dir_NIR: directory of the Near-infrared band image
-    dir_Tr: directory of the thermal data
+    dir_Tr: directory of the thermal data in degree C
     NoDataValue: set null data accordingly
     Veg_threshold: a threshold from NDVI to identify vegetation pixel
     Soil_threshold: a threshold from NDVI to identify soil pixel
@@ -15,6 +19,13 @@ def CanopySoilTemperatureSeparation_Vine(dir_LAI, dir_R, dir_NIR, dir_Tr,
     
     return
     '''
+    
+    import arcpy
+    import gdal
+    import numpy as np
+    import pandas as pd
+    from scipy.stats import linregress
+    
     Array_LAI = arcpy.RasterToNumPyArray(dir_LAI, nodata_to_value=NoDataValue)
     Array_R = arcpy.RasterToNumPyArray(dir_R, nodata_to_value=NoDataValue)
     Array_NIR = arcpy.RasterToNumPyArray(dir_NIR, nodata_to_value=NoDataValue)
@@ -24,11 +35,12 @@ def CanopySoilTemperatureSeparation_Vine(dir_LAI, dir_R, dir_NIR, dir_Tr,
     Array_Tr = Array_Tr ** 4
 
     dims_LAI = Array_LAI.shape
-    print("LAI dimension is:",dims_LAI[0],dims_LAI[1])
+    print("Column of the LAI:",dims_LAI[0],"Row of the LAI:",dims_LAI[1])
     dims_NDVI = Array_NDVI.shape
-    print("The dimesnion of the spectral data is:",dims_NDVI[0],dims_NDVI[1])
+    print("Column of the spectral data:",dims_NDVI[0],"Row of the spectral data:",dims_NDVI[1])
     hor_pixel = int(dims_NDVI[0]/dims_LAI[0])
     ver_pixel = int(dims_NDVI[1]/dims_LAI[1])
+    print("Each LAI pixel contains",hor_pixel,"(column/column) by",ver_pixel,"(row/row) pixels.")
 
     # Get the information from LAI map for data output
     fid=gdal.Open(dir_LAI)
@@ -57,6 +69,9 @@ def CanopySoilTemperatureSeparation_Vine(dir_LAI, dir_R, dir_NIR, dir_Tr,
     renew_coeff = NoDataValue
     slope = NoDataValue
     intercept = NoDataValue
+    correlation = NoDataValue
+    pvalue = NoDataValue
+    stderr = NoDataValue
 
     for irow in range(dims_LAI[0]):
         start_row = irow * hor_pixel
@@ -114,8 +129,8 @@ def CanopySoilTemperatureSeparation_Vine(dir_LAI, dir_R, dir_NIR, dir_Tr,
                 t_soil[irow,icol] = NoDataValue
             t_coeff[irow,icol] = renew_coeff
 
-    tt_canopy = np.sqrt(np.sqrt(t_canopy.copy()))
-    tt_soil = np.sqrt(np.sqrt(t_soil.copy()))
+    tt_canopy = np.sqrt(np.sqrt(t_canopy.copy())) + 273.15
+    tt_soil = np.sqrt(np.sqrt(t_soil.copy())) + 273.15
 
     # Write the output file
     driver = gdal.GetDriverByName('GTiff')
