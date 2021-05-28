@@ -7,10 +7,10 @@ def CanopyHeight_Vine(dir_LAI, dir_DEM, dir_R, dir_NIR,
     (2) the dimension of the DEM, R, and NIR images is the same, and smaller than that of the LAI image.
     
     Parameters:
-    dir_LAI: directory of the LAI image. The resolution is 3.6 meter by 3.6 meter.
-    dir_DEM: directory of the DEM data. The resolution is 0.1 meter by 0.1 meter.
-    dir_R: directory of the Red band image. The resolution is 0.1 meter by 0.1 meter.
-    dir_NIR: directory of the Near-infrared band image. The resolution is 0.1 meter by 0.1 meter.
+    dir_LAI: directory of the LAI image.
+    dir_DEM: directory of the DEM data. 
+    dir_R: directory of the Red band image.
+    dir_NIR: directory of the Near-infrared band image.
     NoDataValue: set null data accordingly
     Veg_threshold: a threshold from NDVI to identify vegetation pixel
     Soil_threshold: a threshold from NDVI to identify soil pixel
