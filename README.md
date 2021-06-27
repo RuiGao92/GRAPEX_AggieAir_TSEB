@@ -30,7 +30,7 @@
 - 1 image containing 3 bands including canopy temperature, soil temperature, and coefficient is supposed to be generated.
 
 ## Main idea of this function
-The paper, evaluation of TSEB turbulent fluxes using different methods for the retrieval of soil and canopy component temperatures from UAV thermal and multispectral imagery (https://link.springer.com/article/10.1007/s00271-018-0585-9), shows the concept how to separate the bulk composite surface radiometric temperature (T_RAD). One key characteristic of this python function (CanopySoilTemperatureSeparation_Vine.py) is avoiding to use the positive linear relationship for canopy and soil temperature estimation for the domain where it does not contain pure vegetation (soil) pixels.<br>
+The paper, [evaluation of TSEB turbulent fluxes using different methods for the retrieval of soil and canopy component temperatures from UAV thermal and multispectral imagery](https://link.springer.com/article/10.1007/s00271-018-0585-9), shows the concept how to separate the bulk composite surface radiometric temperature (T_RAD). One key characteristic of this python function (CanopySoilTemperatureSeparation_Vine.py) is avoiding to use the positive linear relationship for canopy and soil temperature estimation for the domain where it does not contain pure vegetation (soil) pixels.<br>
 A loop is used for temperature separation grid by grid. Inital slope and intercept are set as "NAN", and they will be updated along the process for each grid. Once the NDVI-T_RAD give a negative slope for that processing grid, slope and intercept are updated. In other words, if the slope of the NDVI-T_RAD for the processing grid is positive, the valid negative slope and intercept from the nearest grid will be used for canopy and/or soil temperature estimation. 
 For our project, because the grid (domain) size is 3.6 meter by 3.6 meter, it normally contains both vine vegetation and bare soil in one unit grid. Considering the high-resolution data gathered by the AggieAir:<br>
 - Canopy and soil temperature can be gained directly: average temperature on canopy (soil) pixels.
@@ -42,14 +42,14 @@ For our project, because the grid (domain) size is 3.6 meter by 3.6 meter, it no
 ## Example of a scatter plot showing the separation results
 ![Separation1](https://user-images.githubusercontent.com/51354367/110698995-97235d00-81ab-11eb-885e-d10948c9a443.png)
 
-## Contributing
+## Contact
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.<br>
 This repository is supposed to be modified later accordingly. If there are any mistakes, welcome to leave comments and send them to me. Thank you in advance.<br>
 Rui Gao<br>
 rui.gao@aggiemail.usu.edu<br>
 
 ## Acknowledgement
-Thank Dr. Torres and Ayman for their suggestions and code review.
+Thank Dr. [Torres](https://engineering.usu.edu/cee/people/faculty/torres-alfonso) and Ayman for their suggestions and code review.
 
 ## Citation
 Please cite the paper below when you are using this script.
