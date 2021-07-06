@@ -31,6 +31,7 @@ def CanopySoilTemperatureSeparation_Vine(dir_LAI, dir_R, dir_NIR, dir_Tr,
     Array_NIR = arcpy.RasterToNumPyArray(dir_NIR, nodata_to_value=NoDataValue)
     Array_NDVI = (Array_NIR-Array_R)/(Array_NIR+Array_R)
     Array_Tr = arcpy.RasterToNumPyArray(dir_Tr, nodata_to_value=NoDataValue)
+
     # Stefan-Boltzmann Law
     Array_Tr = Array_Tr ** 4
 
